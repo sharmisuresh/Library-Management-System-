@@ -1,0 +1,97 @@
+.login-wrapper {
+  height: 100vh;
+  background: linear-gradient(to right, #b4b7c4, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: #667eea;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #667eea;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* button[type="submit"]:hover {
+  background-color: #5a67d8;
+} */
+button:disabled {
+  background-color: #d3d3d3;
+}
+
+.forgot-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.forgot-text a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.text-danger {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+.custom-heading {
+  font-weight: bold;
+  color: #333; /* Adjust the color */
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-heading i {
+  margin-right: 10px; /* Adjust space between icon and text */
+}
+

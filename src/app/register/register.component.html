@@ -1,0 +1,38 @@
+<div class="login-wrapper">
+<div class="register-container">
+  <h1 class="custom-heading">📝 Register</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <label for="fullName">Full Name</label>
+      <input id="fullName" formControlName="fullName" type="text">
+      <div *ngIf="fullName?.touched && fullName?.invalid" class="error-message">
+        <small *ngIf="fullName?.errors?.['required']">Full Name is required.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email">
+      <div *ngIf="email?.touched && email?.invalid" class="error-message">
+        <small *ngIf="email?.errors?.['required']">Email is required.</small>
+        <small *ngIf="email?.errors?.['email']">Enter a valid email address.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password">
+      <div *ngIf="password?.touched && password?.invalid" class="error-message">
+        <small *ngIf="password?.errors?.['required']">Password is required.</small>
+        <small *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+      </div>
+    
+    </div>
+
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+</div>
+</div>

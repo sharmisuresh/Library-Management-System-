@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1400&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-box {
+position: relative;
+  z-index: 2; /* make sure content is above the dark layer */
+  text-align: center;
+  color: white;
+}
+
+.background-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* dark transparent layer */
+  z-index: 1;
+}
+
+
+.custom-heading {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.lead {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
