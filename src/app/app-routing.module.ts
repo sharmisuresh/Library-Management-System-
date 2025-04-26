@@ -5,9 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-
-
-
+import { ManagebookComponent } from './managebook/managebook.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-dashboard', component: UserDashboardComponent },
+  { path: 'managebook', component: ManagebookComponent },
   { path: '**', redirectTo: 'login' }
 ];
 

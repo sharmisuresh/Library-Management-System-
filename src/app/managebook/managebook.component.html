@@ -1,0 +1,59 @@
+<div class="book-management-container">
+  <h2>📚 Manage Books</h2>
+  <button class="btn btn-success mb-3" (click)="showAddForm = true">➕ Add Book</button>
+
+  <!-- Add Book Form -->
+  <div *ngIf="showAddForm" class="form-container">
+    <form [formGroup]="bookForm" (ngSubmit)="editingBookId ? updateBook() : addBook()">
+
+      <input type="text" formControlName="title" placeholder="Title"  class="form-control"/>
+      <div *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.hasError('required')" class="text-danger">
+        ⚠️ Title is required
+      </div>
+      <input  type="text" formControlName="author" placeholder="Author" class="form-control"/>
+      <div *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.hasError('required')" class="text-danger">
+        ⚠️ Author is required
+      </div>
+      <input formControlName="genre" placeholder="Genre" />
+      <input type="number" formControlName="quantity" min="1" placeholder="Quantity" />
+      <div *ngIf="bookForm.get('quantity')?.touched && bookForm.get('quantity')?.hasError('min')" class="text-danger">
+        ⚠️ Quantity must be at least 1</div>
+        <div *ngIf="bookForm.get('quantity')?.touched && bookForm.get('quantity')?.hasError('required')" class="text-danger">
+          ⚠️ Quantity is required
+        </div>
+        <button type="submit" class="btn btn-primary">
+          {{ editingBookId ? 'Update' : 'Add' }}
+        </button>
+        <button *ngIf="editingBookId" type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">
+          Cancel
+        </button>
+    </form>
+  </div>
+
+  <!-- Book Table -->
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{book.quantity}}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editBook(book)">✏️ Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">🗑️ Delete</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+

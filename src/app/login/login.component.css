@@ -1,6 +1,6 @@
 .login-wrapper {
   height: 100vh;
-  background: linear-gradient(to right, #b4b7c4, #764ba2);
+  /* background: linear-gradient(to right, #b4b7c4, #764ba2); */
   display: flex;
   justify-content: center;
   align-items: center;

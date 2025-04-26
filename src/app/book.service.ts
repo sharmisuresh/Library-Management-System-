@@ -20,4 +20,8 @@ private baseUrl = 'http://localhost:8084/library';
   deleteBook(bookId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/books/${bookId}`);
   }
+  updateBook(bookId: number, book: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update/${bookId}`, book);
+  }
+
 }
