@@ -7,21 +7,24 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
 
-private baseUrl = 'http://localhost:8084/library';
   constructor(private http: HttpClient) { }
   getBooks(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/books`);
+    return this.http.get('http://localhost:8084/books/all');
   }
 
   addBook(book: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/books`, book);
+    return this.http.post('http://localhost:8084/books/add?role=admin', book, { responseType: 'text' });
   }
 
-  deleteBook(bookId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/books/${bookId}`);
+
+  deleteBook(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:8084/books/delete/${id}?role=admin`, { responseType: 'text' });
   }
+
+
   updateBook(bookId: number, book: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/update/${bookId}`, book);
+    return this.http.put(`http://localhost:8084/books/update/${bookId}?role=admin`, book, { responseType: 'text' });
   }
+
 
 }
