@@ -1,31 +1,62 @@
 .dashboard-container {
-  max-width: 600px;
-  margin: 60px auto;
-  text-align: center;
-  padding: 30px;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+  position: relative;
+  height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.button-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.btn {
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 10px;
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #dc3545; /* Red */
+  color: white;
+  padding: 10px 20px;
   border: none;
-  background-color: #4caf50;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.card {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 320px;
+}
+
+.card h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.action-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  background-color: #007bff; /* Professional Blue */
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
   color: white;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #388e3c;
+.action-button:hover {
+  background-color: #0056b3; /* Darker Blue on hover */
 }

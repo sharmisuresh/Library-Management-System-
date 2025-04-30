@@ -1,10 +1,14 @@
+<!-- user-dashboard.component.html -->
+
 <div class="dashboard-container">
-  <h2>Welcome, User!</h2>
-  <div class="button-grid">
-    <button class="btn" routerLink="/view-books">📚 View Available Books</button>
-    <button class="btn" routerLink="/borrow-book">🛒 Borrow a Book</button>
-    <button class="btn" routerLink="/my-borrowed-books">📄 My Borrowed Books</button>
-    <button class="btn" routerLink="/request-book">📝 Request a Book</button>
-    <button class="btn" (click)="logout()">🚪 Logout</button>
+  <button class="logout-button" (click)="confirmLogout()">Logout</button>
+
+  <div class="card">
+    <h2>Welcome User</h2>
+
+    <button class="action-button view-books" routerLink="/availablebook">View Available Books</button>
+    <button class="action-button borrow-books" (click)="goToBorrowedBooks()">Borrow Books</button>
+    <button class="action-button return-books" routerLink="/return-books">Return Book</button>
+    <button class="action-button request-books" routerLink="/request-book">Request a Book</button>
   </div>
 </div>

@@ -12,6 +12,7 @@ export class ManagebookComponent implements OnInit {
   books: any[] = [];
   bookForm!: FormGroup;
   showAddForm: boolean = false;
+  keyword: string = '';
 
   constructor(private bookService: BookService, private fb: FormBuilder) {}
 
@@ -20,11 +21,31 @@ export class ManagebookComponent implements OnInit {
       title: ['', Validators.required],
       author: ['', Validators.required],
       genre: [''],
-      quantity: ['', [Validators.required, Validators.min(1)]]
+      quantity: ['', [Validators.required, Validators.min(1)]],
+      price: ['', Validators.required],
     });
 
     this.getAllBooks();
   }
+  onSearch(): void {
+    if (this.keyword.trim() === '') {
+      this.getAllBooks(); // If search is empty, show all books
+      return;
+    }
+
+    this.bookService.searchBooks(this.keyword).subscribe({
+      next: (res) => {
+        // Ensure response is an array before assigning
+        this.books = Array.isArray(res) ? res : [];
+      },
+      error: (err) => {
+        alert('Error searching books!');
+        console.error(err);
+        this.books = []; // Ensure no invalid data
+      }
+    });
+  }
+
 
   getAllBooks(): void {
     this.bookService.getBooks().subscribe({
@@ -67,7 +88,8 @@ editBook(book: any): void {
     title: book.title,
     author: book.author,
     genre: book.genre,
-    quantity: book.quantity
+    quantity: book.quantity,
+    price: book.price,
   });
   this.showAddForm = true; // show the form
 }

@@ -1,0 +1,14 @@
+<h2>Borrowed Books</h2>
+
+<div *ngIf="borrowedBooks.length > 0; else noBooks">
+  <ul>
+    <li *ngFor="let book of borrowedBooks">
+      {{ book.bookName }} - {{ book.author }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #noBooks>
+  <p>No books borrowed.</p>
+</ng-template>
+

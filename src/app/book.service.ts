@@ -15,6 +15,9 @@ export class BookService {
   addBook(book: any): Observable<any> {
     return this.http.post('http://localhost:8084/books/add?role=admin', book, { responseType: 'text' });
   }
+  searchBooks(keyword: string): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:8084/books/search`, keyword);
+  }
 
 
   deleteBook(id: number): Observable<any> {

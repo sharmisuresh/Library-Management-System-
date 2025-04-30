@@ -9,10 +9,15 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent {
   constructor(private router: Router) {}
 
-  logout() {
-
-    // Clear any tokens or user info
-    this.router.navigate(['/login']);
+  confirmLogout() {
+    if (confirm('Are you sure you want to logout?')) {
+      // Clear local storage or session if needed
+      localStorage.clear();
+      this.router.navigate(['/']);
+    }
+  }
+  goToBorrowedBooks() {
+    this.router.navigate(['/borrowedbook']);
   }
 
 }

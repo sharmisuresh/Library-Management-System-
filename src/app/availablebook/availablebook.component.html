@@ -1,0 +1,32 @@
+<div class="book-management-container">
+  <h2>📚 Available Books</h2>
+
+  <div class="search-container mb-3">
+    <input
+      type="text"
+      [(ngModel)]="keyword"
+      placeholder="Search here..."
+      class="form-control"
+      (keyup)="onSearch()"
+    />
+    <!-- <button class="btn btn-info mt-2" (click)="onSearch()">🔍 Search</button> -->
+  </div>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{book.quantity}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

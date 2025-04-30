@@ -16,4 +16,15 @@ export class UserService {
     return this.http.post('http://localhost:8084/library/login',credentials,{responseType:'text'} );
   }
 
+  getUserInfo(): Observable<any> {
+    // You can replace this with the actual API endpoint for fetching user data
+    return this.http.get<any>('http://localhost:8084/library/user-info');
+  }
+
+  getUserByEmail(email: string) {
+    return this.http.get<any>(`http://localhost:8084/library/getUserByEmail/${email}`);
+  }
+  getIssuedBooksByUserId(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8084/library/issuedBooks/${userId}`);
+  }
 }

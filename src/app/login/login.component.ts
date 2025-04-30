@@ -40,9 +40,11 @@ export class LoginComponent implements OnInit {
 
         if (res === 'admin') {
           alert('Admin login successful');
+          localStorage.setItem('userEmail', credentials.mailId); 
           this.router.navigate(['/admin-dashboard']);
         } else if (res === 'user') {
           alert('User login successful');
+          localStorage.setItem('userEmail', credentials.mailId); 
           this.router.navigate(['/user-dashboard']);
         }else if (res === 'Invalid password') {
           alert('Invalid password');
@@ -59,8 +61,8 @@ export class LoginComponent implements OnInit {
 
 
 
-  get email() {
-    return this.loginForm.get('email');
+  get mailId() {
+    return this.loginForm.get('mailId');
   }
 
   get password() {

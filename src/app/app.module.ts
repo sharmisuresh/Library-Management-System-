@@ -11,6 +11,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ManagebookComponent } from './managebook/managebook.component';
+import { AvailablebookComponent } from './availablebook/availablebook.component';
+import { BorrowedbookComponent } from './borrowedbook/borrowedbook.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { ManagebookComponent } from './managebook/managebook.component';
     RegisterComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
-    ManagebookComponent
+    ManagebookComponent,
+    AvailablebookComponent,
+    BorrowedbookComponent
   ],
   imports: [
     BrowserModule,

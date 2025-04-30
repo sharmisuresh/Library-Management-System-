@@ -6,6 +6,8 @@ import { RegisterComponent } from './register/register.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ManagebookComponent } from './managebook/managebook.component';
+import { AvailablebookComponent } from './availablebook/availablebook.component';
+import { BorrowedbookComponent } from './borrowedbook/borrowedbook.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-dashboard', component: UserDashboardComponent },
   { path: 'managebook', component: ManagebookComponent },
+  { path: 'availablebook', component: AvailablebookComponent },
+  { path: 'borrowedbook', component: BorrowedbookComponent }, 
   { path: '**', redirectTo: 'login' }
 ];
 

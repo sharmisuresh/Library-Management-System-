@@ -1,5 +1,17 @@
 <div class="book-management-container">
   <h2>📚 Manage Books</h2>
+
+  <div class="search-container mb-3">
+    <input
+      type="text"
+      [(ngModel)]="keyword"
+      placeholder="Search here..."
+      class="form-control"
+      (keyup)="onSearch()"
+    />
+    <!-- <button class="btn btn-info mt-2" (click)="onSearch()">🔍 Search</button> -->
+  </div>
+
   <button class="btn btn-success mb-3" (click)="showAddForm = true">➕ Add Book</button>
 
   <!-- Add Book Form -->
@@ -21,6 +33,9 @@
         <div *ngIf="bookForm.get('quantity')?.touched && bookForm.get('quantity')?.hasError('required')" class="text-danger">
           ⚠️ Quantity is required
         </div>
+        <input type="number" formControlName="price" placeholder="Price" />
+      <div *ngIf="bookForm.get('price')?.touched && bookForm.get('price')?.hasError('required')" class="text-danger">
+        ⚠️ Price is required</div>
         <button type="submit" class="btn btn-primary">
           {{ editingBookId ? 'Update' : 'Add' }}
         </button>
@@ -38,6 +53,7 @@
         <th>Author</th>
         <th>Genre</th>
         <th>Quantity</th>
+        <th>Price</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -47,6 +63,7 @@
         <td>{{ book.author }}</td>
         <td>{{ book.genre }}</td>
         <td>{{book.quantity}}</td>
+        <td>{{book.price}}</td>
         <td>
           <button class="btn btn-warning btn-sm" (click)="editBook(book)">✏️ Edit</button>
           <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">🗑️ Delete</button>

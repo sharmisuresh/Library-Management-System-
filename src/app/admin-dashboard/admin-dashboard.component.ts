@@ -10,9 +10,15 @@ import { Router } from '@angular/router';
 export class AdminDashboardComponent {
   constructor(private router: Router) {}
   logout() {
-
-    // Clear any tokens or user info
-    this.router.navigate(['/login']);
+    const confirmation = window.confirm('Are you sure you want to log out?');
+    if (confirmation) {
+      // Clear user session, token, or other related data
+      // Example: localStorage.clear(); or sessionStorage.clear();
+      this.router.navigate(['/login']);  // Redirect to the login page
+    } else {
+      // User canceled the logout action, do nothing
+    }
   }
+
 
 }
