@@ -11,13 +11,15 @@ import { BookService } from '../book.service';
 })
 export class BorrowedbookComponent implements OnInit {
   borrowedBooks: any[] = [];
-  email!: string;
+  email: string = '';
+  userId: number | null = null;
+  errorMessage: string | null = null;
 
   constructor(private userService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    
-    this.email = sessionStorage.getItem('userEmail') || '';
+
+    this.email = localStorage.getItem('userEmail') || '';
 
     if (this.email) {
       this.userService.getUserByEmail(this.email).subscribe({
@@ -29,16 +31,22 @@ export class BorrowedbookComponent implements OnInit {
             next: (books) => {
               this.borrowedBooks = books;
               console.log('Borrowed Books:', books);
+              this.errorMessage = null;
             },
+            
             error: (err) => {
               console.error('Error fetching borrowed books:', err);
+              this.errorMessage = 'Failed to fetch borrowed books. Please try again later.';
             }
           });
         },
         error: (err) => {
           console.error('Error fetching user:', err);
+          this.errorMessage = 'User not found. Please check your login details.';
         }
       });
+    }else {
+      this.errorMessage = 'No user email found. Please log in again.';
     }
   }
 }

@@ -94,4 +94,21 @@ button:disabled {
 .custom-heading i {
   margin-right: 10px; /* Adjust space between icon and text */
 }
+.google-btn {
+  margin-top: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #444;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-btn:hover {
+  background-color: #f7f7f7;
+}
 

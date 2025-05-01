@@ -1,4 +1,4 @@
-<h2>Borrowed Books</h2>
+<!-- <h2>Borrowed Books</h2>
 
 <div *ngIf="borrowedBooks.length > 0; else noBooks">
   <ul>
@@ -10,5 +10,21 @@
 
 <ng-template #noBooks>
   <p>No books borrowed.</p>
+</ng-template> -->
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<h2>Your Borrowed Books</h2>
+<ul *ngIf="borrowedBooks.length > 0; else noBooks">
+  <li *ngFor="let book of borrowedBooks">
+    {{ book.title }} - Due on: {{ book.dueDate | date }}
+  </li>
+</ul>
+
+<ng-template #noBooks>
+  <p>You have not borrowed any books.</p>
 </ng-template>
+
 

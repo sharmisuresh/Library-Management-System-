@@ -37,11 +37,40 @@ export class AvailablebookComponent implements OnInit{
   getAllBooks(): void {
     this.bookService.getBooks().subscribe({
       next: (res) => {
-        this.books = res;
+        this.books = res.filter((book: any) => book.quantity > 0);
       },
       error: (err) => {
         console.error('Error fetching books:', err);
       }
     });
   }
+  borrowBook(bookId: number): void {
+    const userEmail = localStorage.getItem('userEmail');
+
+    if (!userEmail) {
+      alert('User not logged in.');
+      return;
+    }
+
+    // You should ideally get the userId from backend. For now, use a fixed ID or fetch it.
+    this.bookService.getUserIdByEmail(userEmail).subscribe({
+      next: (userId: number) => {
+        this.bookService.borrowBook(userId, bookId).subscribe({
+          next: (res: string) => {
+            alert(res);
+            this.getAllBooks(); // Refresh list to hide book if quantity is 0
+          },
+          error: (err) => {
+            console.error('Borrow error:', err);
+            alert('Failed to borrow book');
+          }
+        });
+      },
+      error: (err) => {
+        console.error('User fetch error:', err);
+        alert('Could not get user ID');
+      }
+    });
+  }
+
 }

@@ -28,6 +28,14 @@ export class BookService {
   updateBook(bookId: number, book: any): Observable<any> {
     return this.http.put(`http://localhost:8084/books/update/${bookId}?role=admin`, book, { responseType: 'text' });
   }
+  borrowBook(userId: number, bookId: number): Observable<string> {
+    const url = `http://localhost:8084/issue/book?userId=${userId}&bookId=${bookId}`;
+    return this.http.post(url, null, { responseType: 'text' });
+  }
+
+  getUserIdByEmail(email: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:8084/library/user/id?email=${email}`);
+  }
 
 
 }

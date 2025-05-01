@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ManagebookComponent } from './managebook/managebook.component';
 import { AvailablebookComponent } from './availablebook/availablebook.component';
 import { BorrowedbookComponent } from './borrowedbook/borrowedbook.component';
+import { GoogleLoginComponent } from './google-login/google-login.component';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 
 @NgModule({
@@ -25,16 +27,32 @@ import { BorrowedbookComponent } from './borrowedbook/borrowedbook.component';
     UserDashboardComponent,
     ManagebookComponent,
     AvailablebookComponent,
-    BorrowedbookComponent
+    BorrowedbookComponent,
+    GoogleLoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('72291812306-fllqq3vpv1dim4hkhjldsprtm8aeapo1.apps.googleusercontent.com')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

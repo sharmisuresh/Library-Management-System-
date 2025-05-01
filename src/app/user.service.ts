@@ -27,4 +27,11 @@ export class UserService {
   getIssuedBooksByUserId(userId: number): Observable<any> {
     return this.http.get<any>(`http://localhost:8084/library/issuedBooks/${userId}`);
   }
+
+  googleLogin(email: string, name: string): Observable<string> {
+    return this.http.post('http://localhost:8084/library/google-login', { email, name }, { responseType: 'text' });
+  }
+
+
+
 }
