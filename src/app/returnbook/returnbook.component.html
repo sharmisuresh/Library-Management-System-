@@ -1,0 +1,28 @@
+
+
+<div class="container">
+  <h2>Borrowed Books</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Issue Date</th>
+        <th>Due Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let issue of borrowedBooks">
+        <td>{{ issue.book.title }}</td>
+        <td>{{ issue.book.author }}</td>
+        <td>{{ issue.issueDate | date: 'mediumDate' }}</td>
+        <td>{{ issue.dueDate | date: 'mediumDate' }}</td>
+        <td>
+          <button (click)="returnBook(issue.book.id)">Return</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

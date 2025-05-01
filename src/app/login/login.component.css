@@ -112,3 +112,15 @@ button:disabled {
   background-color: #f7f7f7;
 }
 
+.forgot-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.forgot-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center; /* center horizontally */
+  margin-top: 20px;
+}

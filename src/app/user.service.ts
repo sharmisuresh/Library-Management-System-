@@ -32,6 +32,17 @@ export class UserService {
     return this.http.post('http://localhost:8084/library/google-login', { email, name }, { responseType: 'text' });
   }
 
+// in user.service.ts
+getAllUsers(): Observable<any[]> {
+  return this.http.get<any[]>('http://localhost:8084/library/users');
+}
+
+deleteUser(userId: number): Observable<string> {
+  return this.http.delete(
+    `http://localhost:8084/library/users/${userId}`,
+    { responseType: 'text' }
+  );
+}
 
 
 }

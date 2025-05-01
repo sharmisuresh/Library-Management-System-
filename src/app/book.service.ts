@@ -36,6 +36,19 @@ export class BookService {
   getUserIdByEmail(email: string): Observable<number> {
     return this.http.get<number>(`http://localhost:8084/library/user/id?email=${email}`);
   }
+  
+  getBorrowedBooks(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8084/issue/user/${userId}`);
+  }
+
+  returnBook(userId: number, bookId: number): Observable<string> {
+    return this.http.post(
+      `http://localhost:8084/issue/return?userId=${userId}&bookId=${bookId}`,
+      null,
+      { responseType: 'text' }
+    );
+  }
+
 
 
 }

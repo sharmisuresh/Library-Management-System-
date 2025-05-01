@@ -15,6 +15,8 @@ import { AvailablebookComponent } from './availablebook/availablebook.component'
 import { BorrowedbookComponent } from './borrowedbook/borrowedbook.component';
 import { GoogleLoginComponent } from './google-login/google-login.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { ReturnbookComponent } from './returnbook/returnbook.component';
+import { ManageuserComponent } from './manageuser/manageuser.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig,
     ManagebookComponent,
     AvailablebookComponent,
     BorrowedbookComponent,
-    GoogleLoginComponent
+    GoogleLoginComponent,
+    ReturnbookComponent,
+    ManageuserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<div class="manage-user-container">
+  <h2>👥 Manage Users</h2>
+  <table *ngIf="users.length; else noUsers" class="table">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.mailId }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm"
+                  (click)="deleteUser(user.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noUsers>
+    <p>No registered users found.</p>
+  </ng-template>
+</div>
+

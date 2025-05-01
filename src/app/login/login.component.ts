@@ -55,10 +55,12 @@ export class LoginComponent implements OnInit {
         if (res === 'admin') {
           alert('Admin login successful');
           localStorage.setItem('userEmail', credentials.mailId);
+          localStorage.setItem('userRole', 'admin');
           this.router.navigate(['/admin-dashboard']);
         } else if (res === 'user') {
           alert('User login successful');
           localStorage.setItem('userEmail', credentials.mailId);
+          localStorage.setItem('userRole', 'user');
           this.router.navigate(['/user-dashboard']);
         }else if (res === 'Invalid password') {
           alert('Invalid password');
