@@ -1,0 +1,30 @@
+<div class="book-management-container">
+  <div class="button-container">
+    <button class="back-button" (click)="goHome()">Back to Home</button>
+  </div>
+
+  <h2>📚 New Arrivals</h2>
+
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of newBooks">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{ book.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="newBooks.length === 0" class="text-center">
+    <p>No new arrivals available.</p>
+  </div>
+</div>

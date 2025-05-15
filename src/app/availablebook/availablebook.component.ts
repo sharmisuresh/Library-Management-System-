@@ -10,6 +10,11 @@ import { BookService } from '../book.service';
 export class AvailablebookComponent implements OnInit{
   books: any[] = [];
   keyword: string = '';
+  displayedBooks: any[] = []; // books shown on current page
+pageSize = 5;             // books per page
+currentPage = 1;
+totalPages = 0;
+
    constructor(private bookService: BookService) {}
   ngOnInit(): void {
     this.getAllBooks();
@@ -38,12 +43,33 @@ export class AvailablebookComponent implements OnInit{
     this.bookService.getBooks().subscribe({
       next: (res) => {
         this.books = res.filter((book: any) => book.quantity > 0);
+         this.totalPages = Math.ceil(this.books.length / this.pageSize);
+      this.updateDisplayedBooks();
       },
       error: (err) => {
         console.error('Error fetching books:', err);
       }
     });
   }
+  updateDisplayedBooks(): void {
+  const startIndex = (this.currentPage - 1) * this.pageSize;
+  const endIndex = startIndex + this.pageSize;
+  this.displayedBooks = this.books.slice(startIndex, endIndex);
+}
+
+nextPage(): void {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+    this.updateDisplayedBooks();
+  }
+}
+
+prevPage(): void {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.updateDisplayedBooks();
+  }
+}
   borrowBook(bookId: number): void {
     const userEmail = localStorage.getItem('userEmail');
 

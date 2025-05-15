@@ -1,0 +1,41 @@
+<div class="request-management">
+  <h2>Manage Book Requests</h2>
+
+  <table class="request-table" *ngIf="requests.length > 0; else noRequests">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of displayedReports">
+        <td>{{ request.title }}</td>
+        <td>{{ request.author }}</td>
+        <td>{{ request.genre }}</td>
+        <td>
+          <span [class.approved]="request.approved" [class.pending]="!request.approved">
+            {{ request.approved ? 'Approved' : 'Pending' }}
+          </span>
+        </td>
+        <td>
+          <button class="approve-btn" (click)="approveRequest(request.id)" [disabled]="request.approved">
+            Approve
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+  <ng-template #noRequests>
+    <p class="no-data">No book requests available.</p>
+  </ng-template>
+</div>
+

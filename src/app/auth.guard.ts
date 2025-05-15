@@ -7,6 +7,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const userEmail = localStorage.getItem('userEmail');
   const userRole  = localStorage.getItem('userRole');
 
+
   if (userEmail && userRole) {
     // User is “logged in,” so allow navigation
     return true;

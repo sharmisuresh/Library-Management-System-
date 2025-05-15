@@ -1,32 +1,30 @@
-<!-- <div class="admin-dashboard">
-  <h2>Admin Dashboard</h2>
-  <div class="button-group"> -->
-    <!-- <button class="dashboard-btn" routerLink="/manage-users">👥 User Management</button> -->
-    <!-- <button class="dashboard-btn" routerLink="/managebook">📚 Manage Books</button> -->
-     <!-- <button class="dashboard-btn" routerLink="/issued-books">📈 Track Borrowing</button> -->
-    <!-- <button class="dashboard-btn" (click)="logout()">Logout</button>
+
+<!-- <div class="dashboard-container">
+  <div class="sidebar">
+    <button routerLink="managebook">Manage Books</button>
+    <button routerLink="manageuser">Manage Users</button>
+    <button class="logout-btn" (click)="logout()">logout</button>
+  </div>
+
+  <div class="dashboard-content">
+    <router-outlet></router-outlet>
   </div>
 </div> -->
-<!-- admin-dashboard.component.html -->
-<div class="admin-dashboard">
-  <!-- Logout button placed at top-right of the screen -->
-  <div class="logout-btn">
-    <button (click)="logout()">Logout</button>
+
+<div class="dashboard-container">
+  <div class="sidebar">
+    <div class="nav-buttons">
+
+      <button routerLink="managebook">Manage Books</button>
+      <button routerLink="manageuser">Users Details</button>
+      <button routerLink="managerequest">Manage Request</button>
+      <button routerLink="reports">Reports</button>
+    </div>
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 
-  <!-- Card containing the content -->
-  <div class="card">
-    <!-- Dashboard content inside the card -->
-    <div class="dashboard-content">
-      <h1>Welcome Admin!</h1>
-      <div class="buttons">
-        <button class="manage-books" routerLink="/managebook">Manage Books</button>
-        <button class="manage-books" routerLink="/manageuser">Manage Users</button>
-<!-- <button routerLink="/manage-users" class="btn btn-secondary">
-  Manage Users
-</button> -->
-
-      </div>
-    </div>
+  <div class="dashboard-content">
+    <router-outlet></router-outlet>
   </div>
 </div>
+

@@ -1,4 +1,4 @@
-:host {
+/* :host {
   display: block;
   height: 100vh;
   margin: 0;
@@ -20,7 +20,7 @@
 
 .content-box {
 position: relative;
-  z-index: 2; /* make sure content is above the dark layer */
+  z-index: 2;
   text-align: center;
   color: white;
 }
@@ -31,7 +31,7 @@ position: relative;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* dark transparent layer */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
@@ -61,4 +61,104 @@ position: relative;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+} */
+
+
+.home-container {
+  /* background-image: url('https://images.unsplash.com/photo-1600195077072-1d9ffbbb413e'); */
+  background-image: url('https://images.unsplash.com/photo-1535905557558-afc4877a26fc?auto=format&fit=crop&w=1400&q=80');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #0d2b42;
+  color: #fff;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.login-links a {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.welcome-section {
+  text-align: center;
+  padding: 60px 20px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.welcome-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.welcome-section p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.hide-btn {
+  padding: 10px 20px;
+  background-color: #f1a208;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.services {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #000;
+  font-weight: bold;
+}
+
+.card.borrow {
+  background-color: #ffcc29;
+}
+
+.card.return {
+  background-color: #d9534f;
+  color: white;
+}
+
+.card.search {
+  background-color: #6c5ce7;
+  color: white;
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }

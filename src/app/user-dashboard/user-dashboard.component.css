@@ -1,4 +1,4 @@
-.dashboard-container {
+/* .dashboard-container {
   position: relative;
   height: 100vh;
   background-color: #f0f2f5;
@@ -12,7 +12,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -47,7 +47,7 @@
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
-  background-color: #007bff; /* Professional Blue */
+  background-color: #007bff;
   border: none;
   border-radius: 10px;
   font-size: 16px;
@@ -58,5 +58,48 @@
 }
 
 .action-button:hover {
-  background-color: #0056b3; /* Darker Blue on hover */
+  background-color: #0056b3;
+} */
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Push logout to bottom */
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-buttons button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  padding: 20px;
 }

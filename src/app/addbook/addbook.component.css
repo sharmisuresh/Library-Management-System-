@@ -59,10 +59,10 @@ button {
   background-color: #eef;
 }
 .text-danger {
-  color: #e74c3c; /* red */
+  color: #e74c3c;
   font-size: 0.85rem;
-  font-style: italic;
-  margin-top: 4px;
+  /* font-style: italic; */
+  /* margin-top: 2dvb; */
 }
 .search-container {
   width: 100%;
@@ -111,11 +111,3 @@ button {
   font-weight: bold;
 }
 
-.pagination-controls {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.pagination-controls button {
-  margin: 0 5px;
-}

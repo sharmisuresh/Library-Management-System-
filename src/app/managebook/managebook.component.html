@@ -9,41 +9,98 @@
       class="form-control"
       (keyup)="onSearch()"
     />
+
+<div class="text-center mb-3">
+  <button (click)="showFilter = true" class="btn btn-outline-primary filter-button">🔍 Filter</button>
+
+</div>
+
+<!-- Filter Modal -->
+<div class="modal-overlay" *ngIf="showFilter">
+  <div class="modal-content">
+    <h3>🔍 Filter Books</h3>
+
+    <div class="filter-row">
+      <label for="bookName">Book Name</label>
+      <input id="bookName" type="text" [(ngModel)]="bookName" placeholder="Enter Book Name" />
+    </div>
+
+    <div class="filter-row">
+      <label for="genre">Genre</label>
+      <input id="genre" type="text" [(ngModel)]="genre" placeholder="Enter Genre" />
+    </div>
+
+    <div class="btn-group">
+      <button (click)="applyFilter()">Apply Filter</button>
+      <button (click)="cancelFilter()" class="cancel-btn">Close</button>
+    </div>
+  </div>
+
+
+
+  </div>
     <!-- <button class="btn btn-info mt-2" (click)="onSearch()">🔍 Search</button> -->
   </div>
 
   <button class="btn btn-success mb-3" (click)="showAddForm = true">➕ Add Book</button>
 
   <!-- Add Book Form -->
-  <div *ngIf="showAddForm" class="form-container">
+  <!-- Edit/Add Book Modal -->
+<div class="modal-overlay" *ngIf="showAddForm">
+  <div class="modal-content">
+    <h3>{{ editingBookId ? '✏️ Edit Book' : '➕ Add Book' }}</h3>
     <form [formGroup]="bookForm" (ngSubmit)="editingBookId ? updateBook() : addBook()">
-
-      <input type="text" formControlName="title" placeholder="Title"  class="form-control"/>
+      <div class="form-group">
+  <label for="title">📖 Title</label>
+  <input id="title" type="text" formControlName="title" placeholder="Enter Title" class="form-control" />
+</div>
       <div *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.hasError('required')" class="text-danger">
         ⚠️ Title is required
       </div>
-      <input  type="text" formControlName="author" placeholder="Author" class="form-control"/>
+      <div *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.hasError('maxlength')" class="text-danger">
+  ⚠️ Title cannot exceed 20 characters
+</div>
+
+<div class="form-group">
+  <label for="author">✍️ Author</label>
+  <input id="author" type="text" formControlName="author" placeholder="Enter Author" class="form-control" />
+</div>
+
       <div *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.hasError('required')" class="text-danger">
         ⚠️ Author is required
       </div>
-      <input formControlName="genre" placeholder="Genre" />
-      <input type="number" formControlName="quantity" min="1" placeholder="Quantity" />
-      <div *ngIf="bookForm.get('quantity')?.touched && bookForm.get('quantity')?.hasError('min')" class="text-danger">
-        ⚠️ Quantity must be at least 1</div>
-        <div *ngIf="bookForm.get('quantity')?.touched && bookForm.get('quantity')?.hasError('required')" class="text-danger">
-          ⚠️ Quantity is required
-        </div>
-        <input type="number" formControlName="price" placeholder="Price" />
+
+<div class="form-group">
+  <label for="genre">🎨 Genre</label>
+  <input id="genre" type="text" formControlName="genre" placeholder="Enter Genre" class="form-control" />
+</div>
+
+      <div class="form-group">
+  <label for="quantity">🔢 Quantity</label>
+  <input id="quantity" type="number" formControlName="quantity" placeholder="Enter Quantity" class="form-control" />
+</div>
+      <div *ngIf="bookForm.get('quantity')?.touched && bookForm.get('quantity')?.hasError('required')" class="text-danger">
+        ⚠️ Quantity is required
+      </div>
+      <div *ngIf="bookForm.get('quantity')?.hasError('min')" class="text-danger">
+        ⚠️ Quantity must be at least 1
+      </div>
+
+      <div class="form-group">
+  <label for="price">💰 Price</label>
+  <input id="price" type="number" formControlName="price" placeholder="Enter Price" class="form-control" />
+</div>
       <div *ngIf="bookForm.get('price')?.touched && bookForm.get('price')?.hasError('required')" class="text-danger">
-        ⚠️ Price is required</div>
-        <button type="submit" class="btn btn-primary">
-          {{ editingBookId ? 'Update' : 'Add' }}
-        </button>
-        <button *ngIf="editingBookId" type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">
-          Cancel
-        </button>
+        ⚠️ Price is required
+      </div>
+
+      <div class="btn-group mt-3">
+        <button type="submit" class="btn btn-primary">{{ editingBookId ? 'Update' : 'Add' }}</button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">Cancel</button>
+      </div>
     </form>
   </div>
+</div>
 
   <!-- Book Table -->
   <table class="table table-bordered mt-3">
@@ -58,7 +115,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books">
+      <tr *ngFor="let book of displayedBooks">
         <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.genre }}</td>
@@ -72,5 +129,10 @@
       </tr>
     </tbody>
   </table>
+  <div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  Page {{ currentPage }} of {{ totalPages }}
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
 </div>
 

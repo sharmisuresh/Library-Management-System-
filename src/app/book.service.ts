@@ -11,7 +11,9 @@ export class BookService {
   getBooks(): Observable<any> {
     return this.http.get('http://localhost:8084/books/all');
   }
-
+  getBookById(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8084/books/book/${id}`);
+  }
   addBook(book: any): Observable<any> {
     return this.http.post('http://localhost:8084/books/add?role=admin', book, { responseType: 'text' });
   }
@@ -20,10 +22,11 @@ export class BookService {
   }
 
 
-  deleteBook(id: number): Observable<any> {
-    return this.http.delete(`http://localhost:8084/books/delete/${id}?role=admin`, { responseType: 'text' });
-  }
-
+ deleteBook(id: number): Observable<any> {
+  return this.http.delete(`http://localhost:8084/books/delete/${id}?role=admin`, {
+    responseType: 'text' as 'json'
+  });
+}
 
   updateBook(bookId: number, book: any): Observable<any> {
     return this.http.put(`http://localhost:8084/books/update/${bookId}?role=admin`, book, { responseType: 'text' });
@@ -36,7 +39,7 @@ export class BookService {
   getUserIdByEmail(email: string): Observable<number> {
     return this.http.get<number>(`http://localhost:8084/library/user/id?email=${email}`);
   }
-  
+
   getBorrowedBooks(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8084/issue/user/${userId}`);
   }
@@ -49,6 +52,18 @@ export class BookService {
     );
   }
 
+
+filterBooks(title: string, genre: string) {
+  return this.http.get<any[]>(`http://localhost:8084/books/filter`, {
+    params: {
+      title,
+      genre
+    }
+  });
+}
+getNewArrivals() {
+  return this.http.get<any[]>(`http://localhost:8084/books/new-arrivals`);
+}
 
 
 }

@@ -1,0 +1,32 @@
+<div class="book-management-container">
+  <h2>📚 ADD Books</h2>
+
+  <!-- Add Book Form -->
+  <h2>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h2>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <label>Title:</label>
+    <input formControlName="title" />
+
+    <label>Author:</label>
+    <input formControlName="author" />
+
+    <label>Genre:</label>
+    <input formControlName="genre" />
+
+    <label>Price:</label>
+    <input type="number" formControlName="price" />
+
+    <label>Quantity:</label>
+    <input type="number" formControlName="quantity" />
+
+    <button type="submit">{{ isEditMode ? 'Update' : 'Add' }}</button>
+  </form>
+
+  <div *ngIf="isEditMode" class="form-container">
+    <button *ngIf="isEditMode" type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">
+      Cancel
+    </button>
+  </div>
+
+</div>

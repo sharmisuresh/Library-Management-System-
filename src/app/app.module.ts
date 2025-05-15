@@ -17,6 +17,13 @@ import { GoogleLoginComponent } from './google-login/google-login.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { ReturnbookComponent } from './returnbook/returnbook.component';
 import { ManageuserComponent } from './manageuser/manageuser.component';
+import { SearchComponent } from './search/search.component';
+import { BookrequestComponent } from './bookrequest/bookrequest.component';
+import { ManagerequestComponent } from './managerequest/managerequest.component';
+import { ReportsComponent } from './reports/reports.component';
+import { AddbookComponent } from './addbook/addbook.component';
+import { NewarrivalComponent } from './newarrival/newarrival.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -32,7 +39,14 @@ import { ManageuserComponent } from './manageuser/manageuser.component';
     BorrowedbookComponent,
     GoogleLoginComponent,
     ReturnbookComponent,
-    ManageuserComponent
+    ManageuserComponent,
+    SearchComponent,
+    BookrequestComponent,
+    ManagerequestComponent,
+    ReportsComponent,
+    AddbookComponent,
+    NewarrivalComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

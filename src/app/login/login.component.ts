@@ -32,9 +32,6 @@ export class LoginComponent implements OnInit {
         console.log('Google User:', user);
     alert('Google login successful');
     this.sendEmailToBackend(user.email, user.name);
-      //   localStorage.setItem('userEmail', user.email);
-      //   alert('Google login successful');
-      //   this.router.navigate(['/user-dashboard']);
        }
     });
   }
@@ -57,11 +54,13 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userEmail', credentials.mailId);
           localStorage.setItem('userRole', 'admin');
           this.router.navigate(['/admin-dashboard']);
+         window.history.replaceState({}, '', '/admin-dashboard');
         } else if (res === 'user') {
           alert('User login successful');
           localStorage.setItem('userEmail', credentials.mailId);
           localStorage.setItem('userRole', 'user');
           this.router.navigate(['/user-dashboard']);
+         window.history.replaceState({}, '', '/user-dashboard');
         }else if (res === 'Invalid password') {
           alert('Invalid password');
         } else {
@@ -79,6 +78,9 @@ export class LoginComponent implements OnInit {
       next: (res: string) => {
         const role = res;
         console.log('Role from backend:', role);
+
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userRole', role);
 
         if (role === 'admin') {
           localStorage.setItem('userEmail', email);

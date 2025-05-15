@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -43,6 +43,14 @@ deleteUser(userId: number): Observable<string> {
     { responseType: 'text' }
   );
 }
+
+  forgotPassword(email: string, newPassword: string): Observable<any> {
+    const params = new HttpParams()
+      .set('email', email)
+      .set('newPassword', newPassword);
+
+    return this.http.post(`http://localhost:8084/library/forgot-password`, null, { params, responseType: 'text' });
+  }
 
 
 }

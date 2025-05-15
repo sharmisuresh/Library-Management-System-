@@ -12,9 +12,10 @@ export class AdminDashboardComponent {
   logout() {
     const confirmation = window.confirm('Are you sure you want to log out?');
     if (confirmation) {
-      // Clear user session, token, or other related data
-      // Example: localStorage.clear(); or sessionStorage.clear();
-      this.router.navigate(['/login']);  // Redirect to the login page
+      localStorage.clear();
+      localStorage.removeItem('token');
+      alert('Logged out successfully!');
+      this.router.navigate(['/login']);
     } else {
       // User canceled the logout action, do nothing
     }

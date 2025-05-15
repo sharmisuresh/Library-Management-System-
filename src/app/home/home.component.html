@@ -1,5 +1,5 @@
-<div class="overlay">
-  <div class="background-filter"></div> <!-- dark layer -->
+<!-- <div class="overlay">
+  <div class="background-filter"></div>
   <div class="content-box">
     <h1 class="custom-heading">📚 Welcome to Library Management System</h1>
     <p class="lead">Manage your books, users, and more.</p>
@@ -7,5 +7,43 @@
       <button routerLink="/login">Login</button>
       <button routerLink="/register">Register</button>
     </div>
+  </div>
+</div> -->
+
+<div class="home-container">
+  <header class="header">
+    <h1>LIBRARY MANAGEMENT</h1>
+    <div class="login-links">
+      <a routerLink="/register">Register</a>
+      <a routerLink="/login">Login</a>
+    </div>
+  </header>
+
+  <div class="welcome-section">
+    <h2>Welcome to <span>Library Management</span></h2>
+    <p>Your gateway to a world of knowledge</p>
+    <button class="hide-btn" (click)="toggleServices()">
+      {{ showServices ? 'Hide Services' : 'Show Services' }}
+    </button>
+  </div>
+
+  <div class="services" *ngIf="showServices">
+    <a [routerLink]="['/search']" class="card-link">
+    <div class="card search">
+      <h3>Search Catalog</h3>
+      <p>Find books quickly by searching our catalog</p>
+    </div>
+  </a>
+    <a routerLink="/newarrival" class="card-link">
+  <div class="card return">
+    <h3>New Arrivals</h3>
+    <p>Explore the latest books added to our collection</p>
+  </div>
+</a>
+
+    <!-- <div class="card borrow">
+      <h3>Borrow Books</h3>
+      <p>Explore and borrow books for your reading pleasure</p>
+    </div> -->
   </div>
 </div>
