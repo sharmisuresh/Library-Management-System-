@@ -1,6 +1,7 @@
 import { UserService } from './../user.service';
 import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class BorrowedbookComponent implements OnInit {
   userId: number | null = null;
   errorMessage: string | null = null;
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {}
+  constructor(private userService: UserService, private route: ActivatedRoute, private toastr: ToastrService) {}
 
   ngOnInit(): void {
 

@@ -24,6 +24,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { AddbookComponent } from './addbook/addbook.component';
 import { NewarrivalComponent } from './newarrival/newarrival.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr'
 
 
 @NgModule({
@@ -55,7 +57,15 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ReactiveFormsModule,
     HttpClientModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+        BrowserAnimationsModule,
+
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+
   ],
   providers: [
     {

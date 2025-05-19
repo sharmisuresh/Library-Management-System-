@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../book.service';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-managebook',
@@ -24,9 +24,11 @@ export class ManagebookComponent implements OnInit {
 pageSize = 5;             // books per page
 currentPage = 1;
 totalPages = 0;
+genres: string[] = [];
 
 
-  constructor(private bookService: BookService, private fb: FormBuilder,  private router: Router ) {}
+
+  constructor(private bookService: BookService, private fb: FormBuilder,  private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.bookForm = this.fb.group({
@@ -57,7 +59,8 @@ onSearch(): void {
       this.updateDisplayedBooks();
     },
     error: (err) => {
-      alert('Error searching books!');
+      this.toastr.error('Error searching books!');
+
       console.error(err);
       this.books = [];
       this.updateDisplayedBooks();
@@ -107,6 +110,14 @@ cancelFilter(): void {
   this.bookService.getBooks().subscribe({
     next: (res) => {
       this.books = res.filter((book: any) => book.quantity > 0);
+
+         const genreSet = new Set<string>();
+      this.books.forEach(book => {
+        if (book.genre) {
+          genreSet.add(book.genre);
+        }
+      });
+      this.genres = Array.from(genreSet);
       this.totalPages = Math.ceil(this.books.length / this.pageSize);
       this.currentPage = 1;
       this.updateDisplayedBooks();
@@ -142,7 +153,8 @@ prevPage(): void {
   addBook(): void {
     if (this.bookForm.invalid){
       this.bookForm.markAllAsTouched(); // 👈 Add this line
-    alert('Please correct the errors before submitting.');
+    this.toastr.success('Please correct the errors before submitting.');
+
       return;
     }
 
@@ -150,12 +162,14 @@ prevPage(): void {
 
     this.bookService.addBook(newBook).subscribe({
       next: () => {
-        alert('Book added successfully!');
+        this.toastr.success('Book added successfully!');
+
         this.bookForm.reset();
         this.getAllBooks(); // refresh list
       },
       error: (err) => {
-        alert('Error adding book!');
+        this.toastr.error('Error adding book!');
+
         console.error(err);
       }
     });
@@ -183,14 +197,16 @@ updateBook(): void {
 
   this.bookService.updateBook(this.editingBookId, updatedBook).subscribe({
     next: () => {
-      alert('Book updated successfully!');
+      this.toastr.success('Book updated successfully!');
+
       this.editingBookId = null;
       this.bookForm.reset();
       this.showAddForm = false;
       this.getAllBooks(); // refresh list
     },
     error: (err) => {
-      alert('Error updating book!');
+      this.toastr.error('Error updating book!');
+
       console.error(err);
     }
   });
@@ -207,11 +223,13 @@ cancelEdit() {
 
 //     this.bookService.deleteBook(id).subscribe({
 //       next: () => {
-//         alert('Book deleted!');
+//         this.toastr.success('Book deleted!');
+
 //         this.getAllBooks(); // refresh
 //       },
 //       error: (err) => {
-//         alert('Error deleting book.');
+//         this.toastr.success('Error deleting book.');
+
 //         console.error(err);
 //       }
 //     });
@@ -230,7 +248,8 @@ deleteBook(id: number): void {
 
     error: (err) => {
       // fallback in case of other errors
-      alert('Something went wrong.');
+      this.toastr.error('Something went wrong.');
+
       console.error(err);
     }
   });

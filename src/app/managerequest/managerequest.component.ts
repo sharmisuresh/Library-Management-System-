@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookrequestService } from '../bookrequest.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface BookRequest {
   id: number;
@@ -27,7 +28,7 @@ displayedReports: any[] = [];
 
 
 
-  constructor(private bookrequestService: BookrequestService) {}
+  constructor(private bookrequestService: BookrequestService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getRequests();
@@ -70,11 +71,13 @@ prevPage(): void {
     this.bookrequestService.approveRequest(requestId).subscribe(
       () => {
         this.getRequests();
-        alert('Book request approved successfully!');
+        this.toastr.error('Book request approved successfully!');
+
       },
       (error) => {
         console.error('Error approving request:', error);
-        alert('Error approving request.');
+        this.toastr.error('Error approving request.');
+
       }
     );
   }

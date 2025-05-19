@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../book.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class AddbookComponent implements OnInit {
     private fb: FormBuilder,
     private bookService: BookService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -54,12 +56,14 @@ export class AddbookComponent implements OnInit {
 
     if (this.isEditMode) {
       this.bookService.updateBook(this.bookId, formData).subscribe(() => {
-        alert('Book updated successfully!');
+        this.toastr.success('Book updated successfully!');
+
          this.router.navigate(['/admin-dashboard/managebook']);
       });
     } else {
       this.bookService.addBook(formData).subscribe(() => {
-        alert('Book added successfully!');
+        this.toastr.success('Book added successfully!');
+
         this.bookForm.reset(); // ✅ Clears the form
         this.router.navigate(['/admin-dashboard/managebook']);
         // this.router.navigate(['managebook']);

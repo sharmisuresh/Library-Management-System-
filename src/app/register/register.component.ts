@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class RegisterComponent {
   successMessage: string | any = null;
 
 
-  constructor(private fb: FormBuilder, private router: Router, private userService: UserService) {
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService,private toastr: ToastrService) {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -41,13 +41,15 @@ export class RegisterComponent {
       this.userService.register(userData).subscribe({
         next: (response) => {
           console.log("Registration Success", response);
-          alert("Registered successfully!");
+          this.toastr.success('Registered successfully!');
+
           this.router.navigate(['/login']);  // Navigate to login page after successful registration
         },
         error: (error) => {
           console.error(error);
           console.log(error);
-          alert('Registration failed. Try again.');  // Show error message if registration fails
+          this.toastr.success('Registration failed. Try again.');
+  // Show error message if registration fails
         }
       });
     }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookrequestService } from '../bookrequest.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bookrequest',
@@ -17,7 +18,7 @@ export class BookrequestComponent {
 
   message = '';
 
-  constructor(private bookrequestService: BookrequestService) {}
+  constructor(private bookrequestService: BookrequestService, private toastr: ToastrService) {}
 
   submitRequest() {
     this.bookrequestService.requestBook(this.request).subscribe(response => {

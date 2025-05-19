@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-search',
@@ -20,8 +21,10 @@ export class SearchComponent implements OnInit{
 pageSize = 5;             // books per page
 currentPage = 1;
 totalPages = 0;
+genres: string[] = [];
 
-     constructor(private bookService: BookService, private router: Router) {}
+
+     constructor(private bookService: BookService, private router: Router,private toastr: ToastrService) {}
     ngOnInit(): void {
       this.getAllBooks();
     }
@@ -41,7 +44,8 @@ totalPages = 0;
           this.filteredBooks = res;
         },
         error: (err) => {
-          alert('Error searching books!');
+          this.toastr.error('Error searching books!');
+
           console.error(err);
           this.books = []; // Ensure no invalid data
         }
@@ -65,7 +69,8 @@ totalPages = 0;
              this.genre = '';
           },
           error: (err) => {
-            alert('Error filtering books!');
+            this.toastr.success('Error filtering books!');
+
             console.error(err);
             this.filteredBooks = [];
           }
@@ -85,6 +90,14 @@ totalPages = 0;
       this.bookService.getBooks().subscribe({
         next: (res) => {
           this.books = res.filter((book: any) => book.quantity > 0);
+
+          const genreSet = new Set<string>();
+      this.books.forEach(book => {
+        if (book.genre) {
+          genreSet.add(book.genre);
+        }
+      });
+      this.genres = Array.from(genreSet);
                    this.totalPages = Math.ceil(this.books.length / this.pageSize);
       this.updateDisplayedBooks();
         },

@@ -1,6 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { BookService } from '../book.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-newarrival',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class NewarrivalComponent implements OnInit{
  newBooks: any[] = [];
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(private bookService: BookService, private router: Router,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.bookService.getNewArrivals().subscribe({

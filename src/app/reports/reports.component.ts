@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportserviceService } from '../reportservice.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,7 +18,7 @@ totalPages = 0;
 displayedReports: any[] = [];
 
 
-  constructor(private adminReportService: ReportserviceService) {}
+  constructor(private adminReportService: ReportserviceService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getIssuedBooksReports();

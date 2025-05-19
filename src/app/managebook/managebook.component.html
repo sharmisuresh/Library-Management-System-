@@ -25,10 +25,20 @@
       <input id="bookName" type="text" [(ngModel)]="bookName" placeholder="Enter Book Name" />
     </div>
 
-    <div class="filter-row">
+    <!-- <div class="filter-row">
       <label for="genre">Genre</label>
       <input id="genre" type="text" [(ngModel)]="genre" placeholder="Enter Genre" />
-    </div>
+    </div> -->
+
+
+    <div class="filter-row">
+  <label for="genre">Genre</label>
+
+  <select id="genre" [(ngModel)]="genre" >
+    <option value="">All</option>
+    <option *ngFor="let g of genres" [value]="g">{{ g }}</option>
+  </select>
+</div>
 
     <div class="btn-group">
       <button (click)="applyFilter()">Apply Filter</button>

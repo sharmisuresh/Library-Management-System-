@@ -1,9 +1,12 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export const authGuard: CanActivateFn = (route, state) => {
+
   const router = inject(Router);
+    const toastr = inject(ToastrService);
   const userEmail = localStorage.getItem('userEmail');
   const userRole  = localStorage.getItem('userRole');
 
@@ -14,7 +17,8 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   // Not logged in → redirect to /login
-  alert('You must log in first!');
+  toastr.warning('You must log in first!');
+
   router.navigate(['/login']);
   return false;
 };

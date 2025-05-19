@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-returnbook',
@@ -10,7 +11,7 @@ import { BookService } from '../book.service';
 export class ReturnbookComponent implements OnInit {
   borrowedBooks: any[] = [];
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadBorrowedBooks();
@@ -19,7 +20,8 @@ export class ReturnbookComponent implements OnInit {
   loadBorrowedBooks(): void {
     const userEmail = localStorage.getItem('userEmail');
     if (!userEmail) {
-      alert('User not logged in.');
+      this.toastr.error('User not logged in.');
+
       return;
     }
 
@@ -32,13 +34,15 @@ export class ReturnbookComponent implements OnInit {
           },
           error: (err) => {
             console.error('Error fetching borrowed books:', err);
-            alert('Error fetching borrowed books.');
+            this.toastr.error('Error fetching borrowed books.');
+
           }
         });
       },
       error: (err) => {
         console.error('Error fetching user ID:', err);
-        alert('Error fetching user ID.');
+        this.toastr.error('Error fetching user ID.');
+
       }
     });
   }
@@ -46,7 +50,8 @@ export class ReturnbookComponent implements OnInit {
   returnBook(bookId: number): void {
     const userEmail = localStorage.getItem('userEmail');
     if (!userEmail) {
-      alert('User not logged in.');
+      this.toastr.error('User not logged in.');
+
       return;
     }
 
@@ -54,12 +59,15 @@ export class ReturnbookComponent implements OnInit {
       next: (userId) => {
         this.bookService.returnBook(userId, bookId).subscribe({
           next: (res) => {
-            alert(res); // e.g. "Book returned with fine: ₹6230"
+
+            this.toastr.success(res);
+
             this.loadBorrowedBooks(); // refresh the list
           },
           error: (err) => {
             console.error('Error returning book:', err);
-            alert('Failed to return book.');
+            this.toastr.error('Failed to return book.');
+
           }
         });
       },

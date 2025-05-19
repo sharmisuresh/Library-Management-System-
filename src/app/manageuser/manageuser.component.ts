@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manageuser',
@@ -15,7 +16,7 @@ totalPages = 0;
 displayedReports: any[] = [];
 
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -58,12 +59,15 @@ prevPage(): void {
     if (!confirm('Are you sure you want to delete this user?')) return;
     this.userService.deleteUser(id).subscribe({
       next: (msg) => {
-        alert(msg);
+        
+        this.toastr.success(msg);
+
         this.loadUsers(); // refresh list
       },
       error: (err) => {
         console.error('Delete failed', err);
-        alert('Delete failed');
+        this.toastr.error('Delete failed');
+
       }
     });
   }

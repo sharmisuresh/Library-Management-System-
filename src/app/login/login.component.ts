@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { SocialAuthService, SocialUser, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private authService: SocialAuthService
+    private authService: SocialAuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +32,8 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user: SocialUser) => {
       if (user) {
         console.log('Google User:', user);
-    alert('Google login successful');
+    this.toastr.success('Google login successful');
+
     this.sendEmailToBackend(user.email, user.name);
        }
     });
@@ -50,21 +53,25 @@ export class LoginComponent implements OnInit {
         console.log('Server Response:', res);
 
         if (res === 'admin') {
-          alert('Admin login successful');
+          this.toastr.success('Admin login successful');
+
           localStorage.setItem('userEmail', credentials.mailId);
           localStorage.setItem('userRole', 'admin');
           this.router.navigate(['/admin-dashboard']);
          window.history.replaceState({}, '', '/admin-dashboard');
         } else if (res === 'user') {
-          alert('User login successful');
+          this.toastr.success('User login successful');
+
           localStorage.setItem('userEmail', credentials.mailId);
           localStorage.setItem('userRole', 'user');
           this.router.navigate(['/user-dashboard']);
          window.history.replaceState({}, '', '/user-dashboard');
         }else if (res === 'Invalid password') {
-          alert('Invalid password');
+          this.toastr.warning('Invalid password');
+
         } else {
-          alert('User Not Found');
+          this.toastr.warning('User Not Found');
+
         }
       },
       error: (err) => {
@@ -89,12 +96,14 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userEmail', email);
           this.router.navigate(['/user-dashboard']);
         } else {
-          alert('Unauthorized user');
+          this.toastr.warning('Unauthorized user');
+
         }
       },
       error: (err) => {
         console.error('Google_login_backend_error:', err);
-        alert('Login failed on server');
+        this.toastr.error('Login failed on server');
+
       }
 
     });

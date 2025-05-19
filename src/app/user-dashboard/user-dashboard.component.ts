@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SubscriptionLike } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -14,7 +15,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
       private popStateHandler: any;
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(private router: Router, private location: Location,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     const userEmail = localStorage.getItem('userEmail');

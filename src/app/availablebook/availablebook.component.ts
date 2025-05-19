@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-availablebook',
@@ -15,7 +16,7 @@ pageSize = 5;             // books per page
 currentPage = 1;
 totalPages = 0;
 
-   constructor(private bookService: BookService) {}
+   constructor(private bookService: BookService, private toastr: ToastrService) {}
   ngOnInit(): void {
     this.getAllBooks();
   }
@@ -31,7 +32,8 @@ totalPages = 0;
         this.books = Array.isArray(res) ? res : [];
       },
       error: (err) => {
-        alert('Error searching books!');
+        this.toastr.error('Error searching books!');
+
         console.error(err);
         this.books = []; // Ensure no invalid data
       }
@@ -48,6 +50,7 @@ totalPages = 0;
       },
       error: (err) => {
         console.error('Error fetching books:', err);
+        this.toastr.error('Error fetching books!');
       }
     });
   }
@@ -74,7 +77,8 @@ prevPage(): void {
     const userEmail = localStorage.getItem('userEmail');
 
     if (!userEmail) {
-      alert('User not logged in.');
+      this.toastr.warning('User not logged in.');
+
       return;
     }
 
@@ -83,18 +87,20 @@ prevPage(): void {
       next: (userId: number) => {
         this.bookService.borrowBook(userId, bookId).subscribe({
           next: (res: string) => {
-            alert(res);
+             this.toastr.success(res, 'Success');
             this.getAllBooks(); // Refresh list to hide book if quantity is 0
           },
           error: (err) => {
             console.error('Borrow error:', err);
-            alert('Failed to borrow book');
+            this.toastr.error('Failed to borrow book');
+
           }
         });
       },
       error: (err) => {
         console.error('User fetch error:', err);
-        alert('Could not get user ID');
+        this.toastr.error('Could not get user ID');
+
       }
     });
   }
